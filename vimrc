@@ -4,8 +4,6 @@ set nocompatible
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-filetype off                  " required
-
 "Fish shell not supported by Vundle so need to set to bash for this
 set shell=/bin/bash
 " set the runtime path to include Vundle and initialize
@@ -26,9 +24,6 @@ syntax on
 
 " For plugins to load correctly
 filetype plugin indent on
-
-" TODO: Pick a leader key
-" let mapleader = ","
 
 " Security
 set modelines=0
@@ -119,7 +114,7 @@ let g:netrw_browse_split = 4
 let g:netrw_winsize = 25
 
 "Completor engines
-let g:completor_python_binary = '/home/vierkens/anaconda3/bin/python'
+let g:completor_python_binary = '~/anaconda3/bin/python'
 
 "Asyncrun options
 let g:asyncrun_open = 8
