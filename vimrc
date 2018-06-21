@@ -4,17 +4,21 @@ set nocompatible
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-" TODO: Load plugins here (pathogen or vundle)
 filetype off                  " required
 
+"Fish shell not supported by Vundle so need to set to bash for this
+set shell=/bin/bash
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'lifepillar/vim-solarized8'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'maralla/completor.vim'
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'w0rp/ale'
+Plugin 'vim-airline/vim-airline'
 
 call vundle#end()
 " Turn on syntax highlighting
@@ -44,7 +48,8 @@ set encoding=utf-8
 " Whitespace
 set wrap
 set textwidth=79
-set formatoptions=tcqrn1
+set formatoptions=qrn1
+set formatoptions-=tc
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -84,10 +89,9 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
-" Remap help key.
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-nnoremap <F1> :set invfullscreen<CR>
-vnoremap <F1> :set invfullscreen<CR>
+" Keymaps
+nnoremap <F1> :w <CR> :AsyncRun -raw python %<CR>
+nnoremap <F2> :AsyncStop <CR>
 
 " Formatting
 map <leader>q gqip
@@ -101,12 +105,29 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Color scheme (terminal)
 set background=dark
-colorscheme solarized8
+let g:solarized_use16 = 1
+colorscheme solarized
 
 " Gui stuff
-set guioptions-=m
-set guioptions-=T
+"set guioptions-=m
+"set guioptions-=T
 set wildmenu
+set mouse=a
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 25
 
 "Completor engines
-let g:completor_python_binary = '/home/vierkens/anaconda3'
+let g:completor_python_binary = '/home/vierkens/anaconda3/bin/python'
+
+"Asyncrun options
+let g:asyncrun_open = 8
+let $PYTHONUNBUFFERED=1
+
+"Linting stuff
+let g:ale_enabled = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_set_balloons = 0
+let g:ale_lint_on_text_changed='normal'
+let g:ale_linters = {'python': ['flake8']}
