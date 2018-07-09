@@ -87,6 +87,8 @@ map <leader><space> :let @/=''<cr> " clear search
 " Keymaps
 nnoremap <F1> :w <CR> :AsyncRun -raw python %<CR>
 nnoremap <F2> :AsyncStop <CR>
+imap jk <Esc>
+set timeout timeoutlen=100 ttimeoutlen=100
 
 " Formatting
 map <leader>q gqip
@@ -126,3 +128,4 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_set_balloons = 0
 let g:ale_lint_on_text_changed='normal'
 let g:ale_linters = {'python': ['flake8']}
+let g:ale_echo_delay = 300
